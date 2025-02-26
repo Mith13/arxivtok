@@ -12,6 +12,7 @@ interface StoredFavorite {
 export function loadFavorites(): StoredFavorite[] {
     if (typeof localStorage === 'undefined') return [];
     const stored = localStorage.getItem(STORAGE_KEY);
+    console.log(localStorage);
     return stored ? JSON.parse(stored) : [];
 }
 

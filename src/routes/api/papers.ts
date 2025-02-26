@@ -37,6 +37,7 @@ interface MedrxivResponse {
 }
 
 export async function GET({ request }: APIEvent) {
+    console.log("GETT",request)
 	const url = new URL(request.url)
 	const page = Number(url.searchParams.get("page")) || 0
 	const perPage = Number(url.searchParams.get("perPage")) || 10
@@ -61,20 +62,16 @@ async function fetchArxiv(query: string, page: number, perPage: number): Promise
 	let searchQuery = ""
 	if (query) {
 		const queries = query.split("|").filter(Boolean)
-		if (queries.length > 0) {
+		if (queries.length > 0) {            
 			const formattedQueries = queries.map(q => {
-				const terms = q.trim().split(" ").filter(Boolean)
-				if (terms.length > 1) {
-					const combinedTerms = terms.map(term => `(abs:${term} OR ti:${term} OR all:${term})`).join(" AND ")
-					return `(${combinedTerms})`
-				} else {
-					return `(abs:${terms[0]} OR ti:${terms[0]} OR all:${terms[0]})`
-				}
+                return `(abs:%22${q}%22 OR ti:%22${q}%22 OR all:%22${q}%22)`
 			})
 			searchQuery = formattedQueries.join(" AND ")
+            console.log(searchQuery)
 		}
 	}
 	const arxivUrl = `${ARXIV_API_URL}?search_query=${encodeURIComponent(searchQuery)}&start=${start}&max_results=${perPage}&sortBy=submittedDate&sortOrder=descending`
+    console.log('URL:=',arxivUrl)
 	try {
 		const response = await fetch(arxivUrl)
 		const xmlData = await response.text()

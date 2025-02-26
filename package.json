@@ -2,7 +2,7 @@
   "name": "arxivtok",
   "type": "module",
   "scripts": {
-    "dev": "vinxi dev",
+    "dev": "vinxi dev --host",
     "build": "vinxi build",
     "start": "vinxi start"
   },
@@ -21,7 +21,7 @@
     "solid-sonner": "^0.2.8",
     "tailwind-merge": "^3.0.1",
     "tailwindcss-animate": "^1.0.7",
-    "vinxi": "^0.4.3",
+    "vinxi": "^0.5.3",
     "xml2js": "^0.6.2"
   },
   "devDependencies": {

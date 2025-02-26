@@ -35,7 +35,7 @@ export async function fetchPapers({
     if (queries?.length) {
         params.set("q", queries.join("|"));
     }
-
+    console.log("Fetching",params)
     const response = await fetch(`/api/papers?${params}`);
     if (!response.ok) {
         throw new Error("Failed to fetch papers");

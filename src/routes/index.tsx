@@ -62,6 +62,7 @@ export default function Home() {
     };
 
     const loadPapers = async (reset = false) => {
+        console.log("loading papers",selectedSources())
         if (isLoading()) return;
         setIsLoading(true);
         try {
@@ -93,11 +94,13 @@ export default function Home() {
     };
 
     const handleSearch = (query: string) => {
+        console.log("doing search", query)
         setActiveQueries((prev) => [...new Set([...prev, query])]);
         loadPapers(true);
     };
 
     const removeQuery = (queryToRemove: string) => {
+        console.log("query removing")
         setActiveQueries((prev) => prev.filter((q) => q !== queryToRemove));
         loadPapers(true);
     };

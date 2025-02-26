@@ -36,6 +36,7 @@ export const SearchBar: Component<SearchBarProps> = (props) => {
     const handleSearch = (searchQuery: string) => {
         if (searchQuery.trim()) {
             props.onSearch(searchQuery.trim());
+            console.log("Cleaning search");
             setQuery("");
             setIsExpanded(false);
             inputRef?.blur();
